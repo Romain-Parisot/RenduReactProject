@@ -8,6 +8,7 @@ import NotFoundScreen from "./pages/NotFoundScreen";
 import ProductsScreen from "./pages/ProductsScreen";
 import ProductScreen from "./pages/ProductScreen";
 import CartScreen from "./pages/CartScreen";
+import { CartProvider } from "./context/CartProvider";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
@@ -23,7 +24,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </Provider>
   </React.StrictMode>
 );

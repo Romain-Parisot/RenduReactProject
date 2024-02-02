@@ -14,7 +14,14 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (product) => {
-    const newCart = cart.filter((item) => item.id !== product.id);
+    let itemRemoved = false;
+    const newCart = cart.filter((item) => {
+      if (item.id === product.id && !itemRemoved) {
+        itemRemoved = true;
+        return false;
+      }
+      return true;
+    });
     setCart(newCart);
   };
 

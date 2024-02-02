@@ -6,7 +6,6 @@ import {
 } from "../services/api";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
-import { CartProvider } from "../context/CartProvider";
 import { useCart } from "../context/CartProvider";
 
 export default function ProductScreen() {
@@ -36,49 +35,45 @@ export default function ProductScreen() {
 
   const { addToCart } = useCart();
   return (
-    <CartProvider>
-      <div>
-        <Header />
-        <Link to={`/products`}>Back</Link>
-        {productsIsLoading ? (
-          "Loading..."
-        ) : (
-          <div>
-            <h2>{currentProduct.title}</h2>
-            <img src={currentProduct.image} alt={currentProduct.title} />
-            <p>{currentProduct.description}</p>
-            <p>{currentProduct.price}</p>
-            <button onClick={() => addToCart(currentProduct)}>
-              Add to cart
-            </button>
-          </div>
-        )}
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="Comment"
-          value={comment}
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-        />
-        <button onClick={handleCreateComment}>Submit</button>
-        {productCommentsIsLoading
-          ? "Loading comments..."
-          : productComments?.toReversed().map((comment) => (
-              <div>
-                <p>Username: {comment.username}</p>
-                <p>Comment: {comment.comment}</p>
-              </div>
-            ))}
-      </div>
-    </CartProvider>
+    <div>
+      <Header />
+      <Link to={`/products`}>Back</Link>
+      {productsIsLoading ? (
+        "Loading..."
+      ) : (
+        <div>
+          <h2>{currentProduct.title}</h2>
+          <img src={currentProduct.image} alt={currentProduct.title} />
+          <p>{currentProduct.description}</p>
+          <p>{currentProduct.price}</p>
+          <button onClick={() => addToCart(currentProduct)}>Add to cart</button>
+        </div>
+      )}
+      <input
+        type="text"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+      />
+      <input
+        type="text"
+        placeholder="Comment"
+        value={comment}
+        onChange={(e) => {
+          setComment(e.target.value);
+        }}
+      />
+      <button onClick={handleCreateComment}>Submit</button>
+      {productCommentsIsLoading
+        ? "Loading comments..."
+        : productComments?.toReversed().map((comment) => (
+            <div>
+              <p>Username: {comment.username}</p>
+              <p>Comment: {comment.comment}</p>
+            </div>
+          ))}
+    </div>
   );
 }
