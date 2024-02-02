@@ -1,5 +1,10 @@
 import "./App.css";
+import { CartProvider } from "./context/CartContext";
 
 export default function App() {
-  return <div className="App"></div>;
+  return (
+    <CartProvider>
+      <div className="App"></div>
+    </CartProvider>
+  );
 }
